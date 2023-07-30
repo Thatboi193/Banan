@@ -49,7 +49,7 @@
             }
 
             function fetchPlaceData(lat, lng) {
-                let url = `https://api.geonames.org/findNearbyPlaceName?lat=${lat}&lng=${lng}&username=thatboi193`;
+                let url = `http://api.geonames.org/findNearbyPlaceName?lat=${lat}&lng=${lng}&username=thatboi193`;
 
                 fetch(url)
                 .then(response => response.text())
