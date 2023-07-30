@@ -3,51 +3,74 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <title>Mafia mafia website.gov</title>
-     <style>
-       body {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("crappy car.png");
-        background-attachment: fixed;
-        color: white;
-        }
-        
-    
-     </style>
+        <title>Mafia mafia website.gov</title>
+        <style>
+            body {
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("crappy car.png");
+                background-attachment: fixed;
+                color: white;
+            }
+        </style>
     </head>
-        <body>
-            
-            
-            <h1>Hello! My name is Joakim</h1>
+    <body>
+        <h1>Hello! My name is Joakim</h1>
 
-            <a href="https://www.youtube.com">
-                <input type="submit">
-            </a>
+        <a href="https://www.youtube.com">
+            <input type="submit">
+        </a>
 
-            <p>Click the button to get your coordinates.</p>
+        <p>Click the button to get your coordinates and nearby place name.</p>
 
-            <button onclick="getLocation()">Try It</button>
+        <button onclick="getLocation()">Try It</button>
 
-            <p id="demo"></p>
+        <p id="coordinates"></p>
+        <div id="placeData"></div>
 
-            <script>
-            let x = document.getElementById("demo");
+        <script>
+            let x = document.getElementById("coordinates");
+            let placeDataDiv = document.getElementById("placeData");
+
             function getLocation() {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(showPosition);
                 } else {
                     x.innerHTML = "Geolocation is not supported by this browser.";
                 }
-             }
-            
-            function showPosition(position) {
-                x.innerHTML = "Latitude: " + position.coords.latitude + 
-                "<br>Longitude: " + position.coords.longitude;
             }
-            </script>
-            
 
-            
-        </body>
-<html>
+            function showPosition(position) {
+                x.innerHTML = "Latitude: " + position.coords.latitude +
+                "<br>Longitude: " + position.coords.longitude;
+
+                // Call the API with the coordinates.
+                fetchPlaceData(position.coords.latitude, position.coords.longitude);
+            }
+
+            function fetchPlaceData(lat, lng) {
+                let url = `http://api.geonames.org/findNearbyPlaceName?lat=${lat}&lng=${lng}&username=thatboi193`;
+
+                fetch(url)
+                .then(response => response.text())
+                .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+                .then(data => {
+                    let placeName = data.getElementsByTagName("name")[0].textContent;
+                    let countryName = data.getElementsByTagName("countryName")[0].textContent;
+                    let distance = data.getElementsByTagName("distance")[0].textContent;
+
+                    let html = `
+                        <p>Place Name: ${placeName}</p>
+                        <p>Country: ${countryName}</p>
+                        <p>Distance: ${distance} km</p>
+                    `;
+
+                    placeDataDiv.innerHTML = html;
+                })
+                .catch(err => {
+                    console.error("An error occurred: " + err);
+                });
+            }
+        </script>
+    </body>
+</html>
