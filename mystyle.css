@@ -69,3 +69,11 @@ body {
     width: 100%;
   }
 }
+
+/* Style for sticky navbar */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
