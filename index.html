@@ -49,15 +49,15 @@
             }
 
             function fetchPlaceData(lat, lng) {
-                let url = `https://secure.geonames.org//address?lat=${lat}&lng=${lng}&username=thatboi193`;
+                let url = `https://api.geonames.org/findNearbyPlaceName?lat=${lat}&lng=${lng}&username=thatboi193`;
 
                 fetch(url)
                 .then(response => response.text())
                 .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
                 .then(data => {
-                    let placeName = data.getElementsByTagName("street")[0].textContent;
-                    let countryName = data.getElementsByTagName("houseNumber")[0].textContent;
-                    let distance = data.getElementsByTagName("locality")[0].textContent;
+                    let placeName = data.getElementsByTagName("name")[0].textContent;
+                    let countryName = data.getElementsByTagName("countryName")[0].textContent;
+                    let distance = data.getElementsByTagName("distance")[0].textContent;
 
                     let html = `
                         <p>Place Name: ${placeName}</p>
