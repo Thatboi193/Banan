@@ -1,48 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<title>My first site</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial scale=1">
-<title>My First Site</title>
-<link rel="stylesheet" href="mystyle.css">
-<link rel="icon" type="image/x-icon" href="images/favicon.ico">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="mystyle.css">
 <style>
-    
-  body {
-      
-      background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://picsum.photos/1920/1080/?blur=2");
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: 100% 100%;
-  }
+    body {
+        background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://picsum.photos/1920/900?blur=1");
+        background-attachment: fixed;
+        
+    }
 </style>
-
-
-
 </head>
-
 <body>
 
-<!-- Side navigation -->
-<div class="sidenav">
+<div class="header">
+  <h1>Header</h1>
+  <p>Resize the browser window to see the responsive effect.</p>
+</div>
+
+<div class="topnav">
   <a href="index.html">Home</a>
-  <a href="about.html">About</a>
+  <a href="">About</a>
   <a href="contact.html">Contact</a>
 </div>
 
-<!-- Page content -->
-<div class="main">
-    <h1>About</h1>
+<div class="row">
+  <div class="column side">
     
-    <h2>Tor Vidar Arnesen</h2> 
-
-    <p><h3>Hi i am Tor Vidar Arnesen. <br> I'd like to learn about all sorts of things, but right now i want to make a website.  </h3></p>
+  </div>
   
-</div> 
-
-
-        
-
+  <div class="column middle">
+    <h1>About</h1>
+    <h2>Hi I am a student at Storslett VGS</h2>
+    <p>I have learned abit about c++ and I am now starting to learn about webdev.</p>
+  
+  </div>
+  
+  <div class="column side">
+    
+  </div>
+</div>
+  
 </body>
 </html>
